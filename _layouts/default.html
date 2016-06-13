@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<!-- 百度验证 -->
+		<meta name="baidu-site-verification" content="eIr152ORHO" />
+		<!-- 360好搜验证 -->
+		<meta name="360-site-verification" content="4621c7b8b9917db548b3e657cf620a35" />
+		<!-- 搜狗验证 -->
+		<meta name="sogou_site_verification" content="XfYdXd3dz6"/>
+		<title> {{site.title}} </title>
+
+		<link rel="stylesheet" href="/stylesheets/styles.css">
+		<link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+		
+		<!-- ztree css -->
+		<link rel="stylesheet" href="/stylesheets/zTreeStyle.css" type="text/css">
+
+		<!-- sidebar css -->
+  		<link rel="stylesheet" href="/stylesheets/sidebar.css" type="text/css">
+		<script src="/javascripts/scale.fix.js"> </script>
+		
+		<!-- ztree js -->
+		<script src="/javascripts/jquery-1.4.4.min.js"> </script>
+		<script src="/javascripts/jquery.ztree.core-3.5.js"></script>
+		<script src="/javascripts/ztree_toc.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+		<!-- 百度统计 -->
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+			  var hm = document.createElement("script");
+			  hm.src = "//hm.baidu.com/hm.js?499d2bf81ff600ca5ff3694f225b385e";
+			  var s = document.getElementsByTagName("script")[0]; 
+			  s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+		
+		<!-- Swiftype 搜索 -->
+		<script type="text/javascript">
+			(function (w, d, t, u, n, s, e) {
+				w['SwiftypeObject']=n;
+				w[n]=w[n] || function () {
+					(w[n].q=w[n].q || []).push(arguments);
+				};
+				s=d.createElement(t);
+				e=d.getElementsByTagName(t)[0];
+				s.async=1;
+				s.src=u;
+				e.parentNode.insertBefore(s, e);
+			})(window, document, 'script', '//s.swiftypecdn.com/install/v2/st.js', '_st');
+
+			_st('install', 'LtBVtsvGBRmsjyzj2xwx', '2.0.0');
+		</script>
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="left-side" class="col-sm-3 sidebar hidden-xs">
+			{% include sidebar.html %}
+		</div>
+		<div class="wrapper">
+			<header>
+				<h1>
+					<a href="http://{{site.username}}.github.io/" > {{ site.title }} </a>  
+				</h1>
+				<p> 赏赏花，逗逗水壶，搬搬砖~~~~                             mail:745011927@qq.com</p>
+				<ul>
+					<li>  
+						<a href="https://github.com/zhengzhejun/myblog" target="_blank"> View On <strong> GitHub </strong></a>
+					</li>
+				</ul>
+				<input type="text" class="st-default-search-input" >
+			</header>
+			<section>
+				<h1>
+					<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages">  <span class="octicon octicon-link"></span></a> {{ page.title }}
+				</h1>
+				{{ content }}
+			</section >
+			<section class="footer">
+				<a href="http://indexed.webmasterhome.cn/?domain=zhengzhejun.com|www.zhengzhejun.com" target="_blank"> 收录查询 </a>  |
+				<a href="http://www.coodir.com/" title="免费收录各类优秀网站" target="_blank" > 酷帝网站目录 </a> |
+				<a href="{{site.baseurl}}/sitemap.xml" title="Sitemap" target="_blank" > Sitemap </a>
+				
+			</section>
+		</div>
+		<div class="right"> 
+			<img src="/images/QRCode/head.png" />
+		</div>
+		<footer>
+			<p> Project maintained by <a href="https://github.com/{{site.username}}" target="_blank">
+				{{ site.username }} </a> 
+			</p>
+			<p> Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/{{site.username}}" target="_blank">
+				{{ site.username }} </a> 
+			</p>
+		</footer>
+		
+		<!--[if !IE] >  
+		< script > fixScale(document);</script >  
+		< ![endif]-- >
+
+	</body>
+</html>
