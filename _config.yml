@@ -12,7 +12,7 @@ redcarpet:
 #   extensions: ["fenced_code_blocks", "tables", "highlight", "with_toc_data", "strikethrough", "underline"]
 safe: false
 #pygments: true
-highlighter: pygments
+highlighter: rouge
 title: 郑喆君的博客
 gems: [jekyll-paginate]
 paginate: 5

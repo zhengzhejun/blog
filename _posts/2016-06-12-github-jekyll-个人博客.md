@@ -16,19 +16,19 @@ tags: [jekyll, github]
 ## 遇到的坑
 在post目录下添加了一个自己的markdown文件，其中头文件中指定了date属性
 
-``` vim
+{% highlight vi%}
 ---
 layout: blabla
 title: blabla
 date: 2016-06-09 18:19:01 -0500
 ---
-```
+{% endhighlight %}
 
 但是
 
-``` vim
+{% highlight vi %}
 jekyll serve
-```
+{% endhighlight %}
 
 无法生成该文件的html文件，后来发现date属性日期不能写当天日期，写昨天就行。不知道这算不算一个bug。
 
