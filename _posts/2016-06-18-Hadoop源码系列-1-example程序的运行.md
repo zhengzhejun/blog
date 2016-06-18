@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hadoop源码系列-1-example程序的运行.md
+title: Hadoop源码系列-1-example程序的运行
 category: Hadoop
 tag: Hadoop源码
 ---
