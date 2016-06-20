@@ -134,10 +134,61 @@ google了一下，这是macbook特有的问题，[详见这里](http://mapserver
 
 之后可以解压jar包，看里面的hadoop配置文件。
 
+## 在hadoop源码中添加自己的Log。
+首先，要在example项目中中添加log4j的配置文件。在src/main/目录下，创建resouces，在Intellij下，将该resources文件夹设置为Mark directory as Resources Root，这样该文件下的配置文件将会被打包到jar包中的根目录中，进而被log4j读取。
+这里，我的log配置文件为：
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+    <appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />
+        </layout>
+    </appender>
+
+
+    <appender name="myFile" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/Users/zhengzhejun/software/hadoop-learn/logs/examples.log" /><!-- 设置日志输出文件名 -->
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%p (%c:%L)- %m%n" />
+        </layout>
+    </appender>
 
 
 
+    <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制-->
+    <logger name="org.apache.hadoop.examples" additivity="false">
+        <level value ="debug"/>
+        <appender-ref ref="myConsole" />
+        <appender-ref ref="myFile" />
+    </logger>
 
+    <logger name="org.apache.hadoop" additivity="false">
+        <level value="debug" />
+        <appender-ref ref="myConsole" />
+        <appender-ref ref="myFile" />
+    </logger>
+
+    <!-- 根logger的设置-->
+    <root>
+        <level value ="debug"/>
+        <appender-ref ref="myConsole"/>
+        <appender-ref ref="myFile"/>
+    </root>
+
+</log4j:configuration>
+{% endhighlight %}
+这里简单总结一下log4j的配置文件用法，每次用的时候都忘，都需要临时查一下用法。。。最简答的配置文件里面有三个元素，appender，logger，root。这里appender设置日志类型，比如往console打日志，或者往File打日志。接下来是logger，logger用来指定每个包下用什么appender。root用来指定那些没有指定logger的包下的日志数据应该用什么appender。
+
+添加完配置文件之后，我想看一下Configuration类里面的运行情况，所以在Configuration里面打了几个日志，然后到example项目下，重新mvn -U clean package -DskipTests，获取hadoop-mapreduce-examples-2.6.4.jar。然后运行java -cp ./hadoop-mapreduce-example-2.6.4.jar org.apache.hadoop.examples.WordCount，发现我刚才加在Configuration的日志没有打出来。
+
+我查看了mvn -U clean package -DskipTests的输出，发现有一行为[INFO] Including org.apache.hadoop:hadoop-common:jar:2.6.4 in the shaded jar
+所以我推测，在example项目中打包的话，会从maven本地库中得到org.apache.hadoop:hadoop-common:jar，所以我到hadoop-common-project下的hadoop-common项目中，运行mvn -U clean package install，将更改后的Configuration打包到本地的maven库中。最后回到example项目中，重新打包，并运行jar包，发现添加在Configuration中的日志成功打出来了。
 
 
 
